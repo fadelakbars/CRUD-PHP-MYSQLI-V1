@@ -1,20 +1,20 @@
 <?php
 
-    // 
+    // INISIALISASAI VARIABEL UNTUK KONEKSI DATABASE
     $host = "127.0.0.1";
     $user = "root";
     $pass = "";
     $db = "starter_v1";
 
-    // buat koneksi ke database
+    // BUAT KONEKSI KE DATABASE
     $conn = mysqli_connect($host, $user, $pass, $db);
 
-    // cek koneksi database
+    // CEK KONEKSI DATABASE
     if (!$conn) {
         die("koneksi gagal" . mysqli_connect_error());
     }
 
-    // fungsi untuk menghandle query SELECT
+    // FUNGSI UNTUK MENGHANDLE QUERY SELECT
     function query ($sql) {
         global $conn;
         $result = mysqli_query($conn, $sql);
@@ -24,7 +24,7 @@
         return mysqli_fetch_all($result, MYSQLI_ASSOC);
     }
 
-    // fungsi untuk menghandle query INSERT, UPDATE, DELETE
+    // FUNGSI UNTUK MENGHANDLE QUERY INSERT, UPDATE, DELETE
     function execute($sql) {
         global $conn;
         $result = mysqli_query($conn, $sql);
@@ -37,7 +37,7 @@
     $mahasiswa = query("SELECT * FROM mahasiswa");
     $no = 1;
 
-    // Tambah mahasiswa
+    // TAMBAH MAHASISWA
     if (isset($_POST['tambahmahasiswa'])) {
         $nama = $_POST['nama'];
         $nim = $_POST['nim'];
@@ -46,14 +46,14 @@
         header("Location: index.php");
     }
 
-    // Hapus mahasiswa
+    // HAPUS MAHASISWA
     if (isset($_GET['hapusmahasiswa'])) {
         $id = $_GET['hapusmahasiswa'];
         execute("DELETE FROM mahasiswa WHERE id=$id");
         header("Location: index.php");
     }
 
-    // Ambil data untuk edit
+    // QUERY MAHASISWA UNTK FORM EDIT
     $editData = null;
     if (isset($_GET['editmahasiswa'])) {
         $id = $_GET['editmahasiswa'];
@@ -63,7 +63,7 @@
         }
     }
 
-    // Update mahasiswa
+    // UPDATE DATA MAHASISWA
     if (isset($_POST['updatemahasiswa'])) {
         $id = $_POST['id'];
         $nama = $_POST['nama'];
